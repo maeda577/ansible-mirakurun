@@ -1,0 +1,16 @@
+- name: Set authorized key
+  authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ lookup('file', '/home/' + lookup('env', 'USER') + '/.ssh/id_rsa.pub') }}"
+
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+    use: systemd
+  become: yes
+  when: hostname is defined
+
+- name: Set timezone
+  timezone:
+    name: Asia/Tokyo
+  become: yes

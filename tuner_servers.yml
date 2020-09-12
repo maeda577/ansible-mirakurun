@@ -1,0 +1,4 @@
+- hosts: tuner_servers
+  roles:
+    - common
+    - mirakurun
