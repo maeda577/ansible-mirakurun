@@ -1,6 +1,6 @@
-- include_tasks: setup-ubuntu.yml
+- import_tasks: setup-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- include_tasks: setup-s270.yml
+- import_tasks: setup-s270.yml
 
-- include_tasks: setup-mirakurun.yml
+- import_tasks: setup-mirakurun.yml
