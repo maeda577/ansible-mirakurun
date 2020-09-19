@@ -10,7 +10,6 @@
         * 初期設定が済んでいれば不要
 * 必要な変数
     * ansible_user: ssh接続のユーザー名
-    * hostname: 設定するホスト名
 
 ### mirakurun
 * 目的

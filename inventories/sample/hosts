@@ -1,2 +1,2 @@
 [tuner_servers]
-tuner.example.com ansible_host=192.168.0.100
+mirakurun01 ansible_host=192.168.0.100 ansible_user=pi

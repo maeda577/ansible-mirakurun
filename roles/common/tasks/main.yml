@@ -5,10 +5,9 @@
 
 - name: Set hostname
   hostname:
-    name: "{{ hostname }}"
+    name: "{{ inventory_hostname }}"
     use: systemd
   become: yes
-  when: hostname is defined
 
 - name: Set timezone
   timezone:
