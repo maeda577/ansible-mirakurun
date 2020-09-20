@@ -1,0 +1,20 @@
+- name: Restart mirakurn
+  command: mirakurun restart
+  become: yes
+
+- name: Scan channels
+  uri:
+    url: http://localhost:40772/api/config/channels/scan
+    method: PUT
+    timeout: 3600
+    status_code: 200
+    return_content: yes
+  changed_when: true
+  register: scan_channels
+  until: scan_channels.status == 200
+  retries: 5
+  delay: 5
+
+- name: Restart mirakurn
+  command: mirakurun restart
+  become: yes

@@ -1,0 +1,2 @@
+- name: Rescan channels
+  include_tasks: rescan-channels.yml

@@ -3,6 +3,7 @@
     repo: https://github.com/Chinachu/dvbconf-for-isdb.git
     dest: /usr/local/dvbconf
   become: yes
+  notify: Rescan channels
 
 - name: Install PM2
   npm:
@@ -17,6 +18,7 @@
     unsafe_perm: yes
     production: yes
   become: yes
+  notify: Rescan channels
 
 - name: Install arib test
   npm:
@@ -24,6 +26,7 @@
     global: yes
     unsafe_perm: yes
   become: yes
+  notify: Rescan channels
 
 - name: Copy tuner config
   copy:
@@ -33,27 +36,4 @@
     group: root
   become: yes
   register: copy_tuner_config
-
-- name: Restart mirakurn
-  command: mirakurun restart
-  become: yes
-  when: copy_tuner_config.changed
-
-- name: Scan channels
-  uri:
-    url: http://localhost:40772/api/config/channels/scan
-    method: PUT
-    timeout: 3600
-    status_code: 200
-    return_content: yes
-  when: copy_tuner_config.changed
-  changed_when: true
-  register: scan_channels
-  until: scan_channels.status == 200
-  retries: 5
-  delay: 5
-
-- name: Restart mirakurn
-  command: mirakurun restart
-  become: yes
-  when: copy_tuner_config.changed
+  notify: Rescan channels
