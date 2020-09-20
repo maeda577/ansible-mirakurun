@@ -24,7 +24,7 @@ table inet filter {
         tcp dport ssh accept
 
         # accept_ports
-        tcp dport {{ accept_ports | join(', ') }} accept
+        tcp dport { {{ accept_ports | join(', ') }} } accept
     }
 
     chain forward {
