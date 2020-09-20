@@ -1,0 +1,37 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority 0; policy drop;
+
+        # established/related connections
+        ct state established,related accept
+
+        # invalid connections
+        ct state invalid drop
+
+        # loopback interface
+        iif lo accept
+
+        # ICMP
+        # routers may also want: mld-listener-query, nd-router-solicit
+        ip6 nexthdr icmpv6 icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
+        ip protocol icmp icmp type { destination-unreachable, router-advertisement, time-exceeded, parameter-problem } accept
+
+        # SSH (port 22)
+        tcp dport ssh accept
+
+        # accept_ports
+        tcp dport {{ accept_ports | join(', ') }} accept
+    }
+
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+    }
+
+    chain output {
+        type filter hook output priority 0; policy accept;
+    }
+}

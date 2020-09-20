@@ -1,15 +1,4 @@
-- name: Set authorized key
-  authorized_key:
-    user: "{{ ansible_user }}"
-    key: "{{ lookup('file', '/home/' + lookup('env', 'USER') + '/.ssh/id_rsa.pub') }}"
+- import_tasks: setup-common.yml
 
-- name: Set hostname
-  hostname:
-    name: "{{ inventory_hostname }}"
-    use: systemd
-  become: yes
-
-- name: Set timezone
-  timezone:
-    name: Asia/Tokyo
-  become: yes
+- import_tasks: setup-nftables.yml
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version|int >= 10

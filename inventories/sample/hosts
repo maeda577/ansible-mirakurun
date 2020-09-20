@@ -1,2 +1,2 @@
 [tuner_servers]
-mirakurun01 ansible_host=192.168.0.100 ansible_user=pi ansible_python_interpreter=/usr/bin/python3
+mirakurun01
