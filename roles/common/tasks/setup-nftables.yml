@@ -19,5 +19,6 @@
     dest: /etc/nftables.conf
     owner: root
     group: root
+    validate: nft -c -f %s
   become: yes
   notify: Reload nftables
