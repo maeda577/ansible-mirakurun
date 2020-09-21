@@ -9,6 +9,13 @@
     use: systemd
   become: yes
 
+- name: Set hostname to /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: "127.0.0.1 localhost {{ inventory_hostname }}"
+  become: yes
+
 - name: Set timezone
   timezone:
     name: Asia/Tokyo
