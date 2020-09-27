@@ -34,6 +34,7 @@
     dest: /usr/local/etc/mirakurun/tuners.yml
     owner: root
     group: root
+    mode: 0644
   become: yes
   register: copy_tuner_config
   notify: Rescan channels

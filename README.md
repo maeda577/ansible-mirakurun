@@ -44,8 +44,8 @@ ansible -i inventories/sample/ all -m ping --ask-pass
 ssh-keygen -t rsa -b 4096
 
 # Playbook実行 初回はSSH Keyが登録されていないので--ask-passをつける
-ansible-playbook tuner_servers.yml -i inventories/sample/ --ask-pass -v
+ansible-playbook site.yml -i inventories/sample/ --ask-pass --ask-become-pass -v
 
 # 2回目移行はask-pass無し
-ansible-playbook tuner_servers.yml -i inventories/sample/ -v
+ansible-playbook site.yml -i inventories/sample/ --ask-become-pass -v
 ```

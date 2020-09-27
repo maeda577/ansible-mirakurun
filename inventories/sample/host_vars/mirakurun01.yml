@@ -1,5 +1,6 @@
-ansible_python_interpreter: /usr/bin/python3
 ansible_user: pi
-ansible_host: 192.168.0.100
-accept_ports:
+ansible_host: 192.168.0.57
+accept_tcp_ports:
+  - 10050
   - 40772
+ansible_python_interpreter: /usr/bin/python3

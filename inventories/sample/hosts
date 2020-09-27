@@ -1,2 +1,5 @@
 [tuner_servers]
 mirakurun01
+
+[monitor_servers]
+zabbix01
