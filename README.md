@@ -9,14 +9,12 @@
     * 鍵認証を有効化したりタイムゾーンを設定したりホスト名を設定したりFWを加えたりする
         * 初期設定が済んでいれば不要
 * 必要な変数
-    * ansible_user: ssh接続のユーザー名
-    * accept_ports: 許可するInputのポート(SSHの22番は常に許可)
+    * accept_tcp_ports: 許可するInputのポート(SSHの22番は常に許可)
 
 ### mirakurun
 * 目的
     * mirakurunを導入する
 * 必要な変数
-    * ansible_user: ssh接続のユーザー名
     * nodejs_version: 導入するnode.jsのバージョン番号
         * 未定義の場合はデフォルトで14を導入する
 
