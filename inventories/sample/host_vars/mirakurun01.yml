@@ -1,6 +1,8 @@
 ansible_user: pi
 ansible_host: 192.168.0.57
 accept_tcp_ports:
-  - 10050
-  - 40772
+  - 10050   # zabbix agent
+  - 40772   # mirakurun
+accept_udp_ports:
+  - 5353    # mDNS
 ansible_python_interpreter: /usr/bin/python3

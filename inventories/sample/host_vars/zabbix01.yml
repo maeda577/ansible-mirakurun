@@ -1,5 +1,11 @@
 ansible_user: ubuntu
 ansible_host: 192.168.0.56
 accept_tcp_ports:
-  - 443
-  - 10051
+  - 443     # zabbix WebGUI
+  - 10051   # zabbix agent active check
+accept_udp_ports:
+  - 5353    # mDNS
+
+# 適宜ansible-vaultで暗号化すること
+#mysql_root_user_password: P@ssw0rd!
+mysql_zabbix_user_password: P@ssw0rd!

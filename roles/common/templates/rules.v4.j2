@@ -9,6 +9,11 @@
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -p tcp -m state --syn --state NEW --dport 22 -j ACCEPT
 
+{% if accept_tcp_ports is defined and accept_tcp_ports | length > 0 %}
 -A INPUT -p tcp -m multiport --dports {{ accept_tcp_ports | join(',') }} -j ACCEPT
+{% endif %}
+{% if accept_udp_ports is defined and accept_udp_ports | length > 0 %}
+-A INPUT -p udp -m multiport --dports {{ accept_udp_ports | join(',') }} -j ACCEPT
+{% endif %}
 
 COMMIT

@@ -17,14 +17,20 @@ table inet filter {
 
         # ICMP
         # routers may also want: mld-listener-query, nd-router-solicit
-        ip6 nexthdr icmpv6 icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert } accept
-        ip protocol icmp icmp type { destination-unreachable, router-advertisement, time-exceeded, parameter-problem } accept
+        ip6 nexthdr icmpv6 accept
+        ip protocol icmp accept
 
         # SSH (port 22)
         tcp dport ssh accept
 
         # accept_ports
+{% if accept_tcp_ports is defined and accept_tcp_ports | length > 0 %}
         tcp dport { {{ accept_tcp_ports | join(', ') }} } accept
+{% endif %}
+{% if accept_udp_ports is defined and accept_udp_ports | length > 0 %}
+        udp dport { {{ accept_udp_ports | join(', ') }} } accept
+{% endif %}
+
     }
 
     chain forward {
