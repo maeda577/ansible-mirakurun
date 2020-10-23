@@ -1,0 +1,57 @@
+- name: Install mysql, pip3
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-pip
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  register: install_mysql
+
+- name: Start and enable mysql
+  systemd:
+    name: mysql.service
+    state: started
+    enabled: yes
+  become: yes
+
+# https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html
+# --password Accepted but always ignored.
+- name: Execute mysql_secure_installation
+  command: "mysql_secure_installation --use-default --user=root --password=dummyPassword"
+  become: yes
+  when: install_mysql.changed
+
+- name: Install PyMySQL for community.mysql module
+  pip:
+    name: pymysql
+    state: present
+  become: yes
+
+- name: Create zabbix database
+  community.mysql.mysql_db:
+    name: zabbix
+    encoding: utf8
+    collation: utf8_bin
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
+  notify: restart_zabbix
+
+- name: Create zabbix user
+  community.mysql.mysql_user:
+    name: zabbix
+    host: localhost
+    password: "{{ mysql_zabbix_user_password }}"
+    priv: "zabbix.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
+  notify: restart_zabbix
+
+- name: Import initial schema and data
+  shell: "zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -u zabbix -p{{ mysql_zabbix_user_password }} zabbix"
+  when: install_mysql.changed
+  no_log: true
+  notify: restart_zabbix

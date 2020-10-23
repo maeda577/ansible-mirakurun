@@ -1,8 +1,9 @@
 # Mirakurun構築用Ansible Playbook
 
-[Mygica S270とRaspberryPi3とWSLで録画環境 | メモ帳.scr](https://maeda577.github.io/2020/08/23/s270.html) で書いたmirakurunの構築手順をAnsibleのロールにしたものです。以下2つのロールから構成されます。
+[Mygica S270とRaspberryPi3とWSLで録画環境 | メモ帳.scr](https://maeda577.github.io/2020/08/23/s270.html) で書いたmirakurunの構築手順をAnsibleのロールにしたものです。以下のロールから構成されます。
 * common
 * mirakurun
+* zabbix
 
 ### common
 * 目的
@@ -17,6 +18,13 @@
 * 必要な変数
     * nodejs_version: 導入するnode.jsのバージョン番号
         * 未定義の場合はデフォルトで14を導入する
+
+### zabbix
+* 目的
+    * Zabbix + MySQL + Apacheを導入する
+* 必要な変数
+    * zabbix_version: 導入するZabbixのバージョン番号
+        * 未定義の場合はデフォルトで5.0を導入する
 
 動作環境
 -----------------------
@@ -40,6 +48,9 @@ ansible -i inventories/sample/ all -m ping --ask-pass
 
 # SSH Keyを作る
 ssh-keygen -t rsa -b 4096
+
+# zabbix関連のロールを使うときは関連コレクションを入れる
+ansible-galaxy collection install -r requirements.yml
 
 # Playbook実行 初回はSSH Keyが登録されていないので--ask-passをつける
 ansible-playbook site.yml -i inventories/sample/ --ask-pass --ask-become-pass -v

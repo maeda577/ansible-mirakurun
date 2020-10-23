@@ -1,0 +1,59 @@
+- name: Install zabbix signing key
+  apt_key:
+    url: https://repo.zabbix.com/zabbix-official-repo.key
+  become: yes
+
+- name: Add zabbix deb repository
+  apt_repository:
+    repo: "{{ item }}"
+    update_cache: yes
+  become: yes
+  loop:
+    - "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
+    - "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
+
+- name: Install packages
+  apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - zabbix-apache-conf
+      - zabbix-agent
+      - apache2
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  notify: restart_zabbix
+
+- name: Enable zabbix services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+  become: yes
+  loop:
+    - zabbix-server.service
+    - zabbix-agent.service
+    - apache2.service
+
+- name: Set db password to zabbix_server.conf
+  lineinfile:
+    path: /etc/zabbix/zabbix_server.conf
+    insertafter: "^# DBPassword="
+    line: "DBPassword={{ mysql_zabbix_user_password }}"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: restart_zabbix
+  no_log: true
+
+- name: Set timezone to apache.conf
+  replace:
+    path: /etc/zabbix/apache.conf
+    regexp: "# php_value date.timezone Europe/Riga"
+    replace: "php_value date.timezone Asia/Tokyo"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: restart_zabbix

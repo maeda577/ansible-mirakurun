@@ -1,0 +1,10 @@
+- name: Restart zabbix
+  systemd:
+    name: "{{ item }}"
+    state: reloaded
+  listen: restart_zabbix
+  become: yes
+  loop:
+    - zabbix-server.service
+    - zabbix-agent.service
+    - apache2.service

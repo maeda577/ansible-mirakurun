@@ -1,4 +1,4 @@
 - hosts: monitor_servers
   roles:
     - common
-#    - zabbix
+    - zabbix
