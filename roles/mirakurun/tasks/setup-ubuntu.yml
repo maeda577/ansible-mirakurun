@@ -1,11 +1,3 @@
-- name: Purge snapd
-  apt:
-    name: snapd
-    state: absent
-    purge: yes
-    autoremove: yes
-  become: yes
-
 - name: Install NodeSource signing key
   apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key

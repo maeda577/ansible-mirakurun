@@ -1,2 +1,4 @@
-- name: Rescan channels
-  include_tasks: rescan-channels.yml
+- name: Restart mirakurn
+  command: mirakurun restart
+  become: yes
+  listen: restart_mirakurn

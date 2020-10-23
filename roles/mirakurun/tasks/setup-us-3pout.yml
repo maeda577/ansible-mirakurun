@@ -1,0 +1,42 @@
+- name: Copy udev rules
+  copy:
+    src: 91-tuner.rules
+    dest: /etc/udev/rules.d/91-tuner.rules
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  register: udev_rules
+  notify: restart_mirakurn
+
+- name: Reload udev / usb
+  command: "{{ item }}"
+  become: yes
+  when: udev_rules.changed
+  loop:
+    - udevadm control --reload-rules
+    - usb_modeswitch -v 0x0511 -p 0x0045 --reset-usb
+
+- name: Install build-essential
+  apt:
+    name: build-essential
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+
+- name: Clone recfsusb2n
+  git:
+    repo: https://github.com/epgdatacapbon/recfsusb2n.git
+    dest: "/home/{{ ansible_user }}/recfsusb2n"
+  register: git_clone
+
+- name: Make recfsusb2n
+  community.general.make:
+    chdir: "/home/{{ ansible_user }}/recfsusb2n/src"
+    target: "{{ item }}"
+  become: yes
+  when: git_clone.changed
+  loop:
+    - clean
+    - all
+    - install

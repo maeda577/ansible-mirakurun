@@ -1,10 +1,3 @@
-- name: Clone dvbconf repository
-  git:
-    repo: https://github.com/Chinachu/dvbconf-for-isdb.git
-    dest: /usr/local/dvbconf
-  become: yes
-  notify: Rescan channels
-
 - name: Install PM2
   npm:
     name: pm2
@@ -18,7 +11,7 @@
     unsafe_perm: yes
     production: yes
   become: yes
-  notify: Rescan channels
+  notify: restart_mirakurn
 
 - name: Install arib test
   npm:
@@ -26,15 +19,21 @@
     global: yes
     unsafe_perm: yes
   become: yes
-  notify: Rescan channels
+  notify: restart_mirakurn
+
+- name: Clone dvbconf repository
+  git:
+    repo: https://github.com/Chinachu/dvbconf-for-isdb.git
+    dest: /usr/local/dvbconf
+  become: yes
+  notify: restart_mirakurn
 
 - name: Copy tuner config
-  copy:
-    src: ./files/tuners.yml
+  template:
+    src: tuners.yml.j2
     dest: /usr/local/etc/mirakurun/tuners.yml
     owner: root
     group: root
     mode: 0644
   become: yes
-  register: copy_tuner_config
-  notify: Rescan channels
+  notify: restart_mirakurn

@@ -1,0 +1,43 @@
+# https://www.maspro.co.jp/contact/bro/bro_ch.html
+### GR tokyo skytree
+- name: NHK 総合
+  type: GR
+  channel: '27'
+
+- name: NHK Eテレ
+  type: GR
+  channel: '26'
+
+- name: 日本テレビ
+  type: GR
+  channel: '25'
+
+- name: テレビ朝日
+  type: GR
+  channel: '24'
+
+- name: TBS
+  type: GR
+  channel: '22'
+
+- name: テレビ東京
+  type: GR
+  channel: '23'
+
+- name: フジテレビ
+  type: GR
+  channel: '21'
+
+- name: 東京MX
+  type: GR
+  channel: '16'
+
+### GR tokyo tower
+- name: 放送大学
+  type: GR
+  channel: '28'
+
+### GR local channels
+- name: 千葉テレビ
+  type: GR
+  channel: '30'

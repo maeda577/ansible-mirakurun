@@ -1,6 +1,22 @@
+- name: Check S270 exists
+  command: lsusb -d 187f:0600
+  changed_when: False
+  failed_when: False
+  register: check_s270
+
+- name: Check US-3POUT exists
+  command: lsusb -d 0511:0045
+  changed_when: False
+  failed_when: False
+  register: check_us3pout
+
 - import_tasks: setup-ubuntu.yml
   when: ansible_distribution in ['Ubuntu', 'Debian']
 
 - import_tasks: setup-s270.yml
+  when: check_s270.stdout != ""
+
+- import_tasks: setup-us-3pout.yml
+  when: check_us3pout.stdout != ""
 
 - import_tasks: setup-mirakurun.yml

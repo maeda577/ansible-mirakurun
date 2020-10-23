@@ -1,18 +1,11 @@
-- name: Check S270 exists
-  command: lsusb -d 187f:0600
-  changed_when: False
-  register: check_s270
-
 - name: Download S270 firmware
   get_url:
     url: https://github.com/OpenELEC/dvb-firmware/raw/master/firmware/isdbt_rio.inp
     dest: /lib/firmware/isdbt_rio.inp
-  when: check_s270.stdout != ""
   become: yes
   register: download_s270_firmware
 
-- name: Reboot when firmware downloaded
-  reboot:
-    reboot_timeout: 3600
+- name: Reset s270
+  command: usb_modeswitch -v 0x187f -p 0x0600 --reset-usb
   become: yes
   when: download_s270_firmware.changed == true
