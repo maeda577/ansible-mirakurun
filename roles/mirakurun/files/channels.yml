@@ -28,7 +28,7 @@
   type: GR
   channel: '21'
 
-- name: 東京MX
+- name: TOKYO MX
   type: GR
   channel: '16'
 
@@ -41,3 +41,119 @@
 - name: 千葉テレビ
   type: GR
   channel: '30'
+
+# https://www.apab.or.jp/bs/station/
+# https://www.soumu.go.jp/main_sosiki/joho_tsusin//eisei/eisei.pdf
+### BS
+- name: NHK BS1
+  type: BS
+  channel: BS15_1
+  serviceID: 101
+- name: NHK BSプレミアム
+  type: BS
+  channel: BS03_1
+  serviceID: 103
+- name: BS日テレ
+  type: BS
+  channel: BS13_0
+  serviceID: 141
+- name: BS朝日
+  type: BS
+  channel: BS01_0
+  serviceID: 151
+- name: BS-TBS
+  type: BS
+  channel: BS01_1
+  serviceID: 161
+- name: BSテレ東
+  type: BS
+  channel: BS01_2
+  serviceID: 171
+- name: BSフジ
+  type: BS
+  channel: BS13_1
+  serviceID: 181
+- name: WOWOWプライム
+  type: BS
+  channel: BS03_0
+  serviceID: 191
+- name: WOWOWライブ
+  type: BS
+  channel: BS05_0
+  serviceID: 192
+- name: WOWOWシネマ
+  type: BS
+  channel: BS05_1
+  serviceID: 193
+- name: スターチャンネル1
+  type: BS
+  channel: BS09_1
+  serviceID: 200
+- name: スターチャンネル2
+  type: BS
+  channel: BS15_2
+  serviceID: 201
+- name: スターチャンネル3
+  type: BS
+  channel: BS15_3
+  serviceID: 202
+- name: BS11
+  type: BS
+  channel: BS09_0
+  serviceID: 211
+- name: BS12トゥエルビ
+  type: BS
+  channel: BS09_2
+  serviceID: 222
+- name: 放送大学ex
+  type: BS
+  channel: BS11_0
+  serviceID: 231
+- name: 放送大学on
+  type: BS
+  channel: BS11_1
+  serviceID: 232
+- name: グリーンチャンネル
+  type: BS
+  channel: BS19_0
+  serviceID: 234
+- name: BSアニマックス
+  type: BS
+  channel: BS13_2
+  serviceID: 236
+- name: BSスカパー！
+  type: BS
+  channel: BS11_2
+  serviceID: 241
+- name: J SPORTS 1
+  type: BS
+  channel: BS19_1
+  serviceID: 242
+- name: J SPORTS 2
+  type: BS
+  channel: BS19_2
+  serviceID: 243
+- name: J SPORTS 3
+  type: BS
+  channel: BS21_2
+  serviceID: 244
+- name: J SPORTS 4
+  type: BS
+  channel: BS21_1
+  serviceID: 245
+- name: BS釣りビジョン
+  type: BS
+  channel: BS23_0
+  serviceID: 251
+- name: シネフィルWOWOW
+  type: BS
+  channel: BS21_0
+  serviceID: 252
+- name: BS日本映画専門チャンネル
+  type: BS
+  channel: BS23_1
+  serviceID: 255
+- name: ディズニーチャンネル
+  type: BS
+  channel: BS03_2
+  serviceID: 256

@@ -28,10 +28,20 @@
   become: yes
   notify: restart_mirakurn
 
-- name: Copy tuner config
+- name: Set tuner config
   template:
     src: tuners.yml.j2
     dest: /usr/local/etc/mirakurun/tuners.yml
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: restart_mirakurn
+
+- name: Set channel config
+  copy:
+    src: channels.yml
+    dest: /usr/local/etc/mirakurun/channels.yml
     owner: root
     group: root
     mode: 0644

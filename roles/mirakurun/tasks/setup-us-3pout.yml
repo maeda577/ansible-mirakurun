@@ -40,3 +40,12 @@
     - clean
     - all
     - install
+
+- name: Set recfsusb2n.conf
+  copy:
+    src: recfsusb2n.conf
+    dest: /usr/local/bin/recfsusb2n.conf
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
