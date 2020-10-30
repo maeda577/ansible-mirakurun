@@ -107,11 +107,11 @@
   serviceID: 222
 - name: 放送大学ex
   type: BS
-  channel: BS11_0
+  channel: BS11_2
   serviceID: 231
 - name: 放送大学on
   type: BS
-  channel: BS11_1
+  channel: BS11_3
   serviceID: 232
 - name: グリーンチャンネル
   type: BS
@@ -123,7 +123,7 @@
   serviceID: 236
 - name: BSスカパー！
   type: BS
-  channel: BS11_2
+  channel: BS11_1
   serviceID: 241
 - name: J SPORTS 1
   type: BS
