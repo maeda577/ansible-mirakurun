@@ -50,7 +50,7 @@ ansible -i inventories/sample/ all -m ping --ask-pass
 ssh-keygen -t rsa -b 4096
 
 # zabbix関連のロールを使うときは関連コレクションを入れる
-ansible-galaxy collection install -r requirements.yml
+ansible-galaxy install -r requirements.yml
 
 # Playbook実行 初回はSSH Keyが登録されていないので--ask-passをつける
 ansible-playbook site.yml -i inventories/sample/ --ask-pass --ask-become-pass -v
