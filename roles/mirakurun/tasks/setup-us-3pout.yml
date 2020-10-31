@@ -6,16 +6,9 @@
     group: root
     mode: 0644
   become: yes
-  register: udev_rules
-  notify: restart_mirakurn
-
-- name: Reload udev / usb
-  command: "{{ item }}"
-  become: yes
-  when: udev_rules.changed
-  loop:
-    - udevadm control --reload-rules
-    - usb_modeswitch -v 0x0511 -p 0x0045 --reset-usb
+  notify:
+    - reset_us_3pout
+    - restart_mirakurn
 
 - name: Install build-essential
   apt:
@@ -28,6 +21,7 @@
   git:
     repo: https://github.com/epgdatacapbon/recfsusb2n.git
     dest: "/home/{{ ansible_user }}/recfsusb2n"
+    version: 46c64f7
   register: git_clone
 
 - name: Make recfsusb2n
@@ -40,6 +34,8 @@
     - clean
     - all
     - install
+  tags:
+    - skip_ansible_lint
 
 - name: Set recfsusb2n.conf
   copy:

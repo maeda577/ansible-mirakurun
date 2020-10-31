@@ -3,9 +3,4 @@
     url: https://github.com/OpenELEC/dvb-firmware/raw/master/firmware/isdbt_rio.inp
     dest: /lib/firmware/isdbt_rio.inp
   become: yes
-  register: download_s270_firmware
-
-- name: Reset s270
-  command: usb_modeswitch -v 0x187f -p 0x0600 --reset-usb
-  become: yes
-  when: download_s270_firmware.changed == true
+  notify: reload_s270

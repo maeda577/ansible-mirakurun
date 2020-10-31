@@ -25,6 +25,7 @@
   git:
     repo: https://github.com/Chinachu/dvbconf-for-isdb.git
     dest: /usr/local/dvbconf
+    version: 3f5d210
   become: yes
   notify: restart_mirakurn
 

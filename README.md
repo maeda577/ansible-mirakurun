@@ -34,10 +34,12 @@ Raspberry Pi 3 model B上のUbuntu 20.04とRaspberry Pi OS Lite August 2020で�
 -----------------------
 * Mirakurun側はSSHが繋がる程度にはセットアップしておく
 * inventories/sample/hosts の中のIPアドレスを修正する
-* WSLのUbuntu 20.04で以下を実行。18.04だとaptで入るansibleが古いのでpip経由で入れる
+* WSLのUbuntu 20.04で以下を実行
+
 ``` shell
 # Ansible導入
-sudo apt install ansible sshpass
+sudo apt install python3-pip sshpass
+sudo pip3 install ansible ansible-lint
 
 # 接続先のホストに一度は繋いでknown_hostsに足し、アップデートする
 ssh ubuntu@192.168.0.100 sudo apt update
@@ -57,4 +59,16 @@ ansible-playbook site.yml -i inventories/sample/ --ask-pass --ask-become-pass -v
 
 # 2回目移行はask-pass無し
 ansible-playbook site.yml -i inventories/sample/ --ask-become-pass -v
+```
+
+事前チェック関連のメモ
+-----------------------
+``` shell
+# 構文エラーの確認
+ansible-playbook site.yml -i inventories/sample/ --syntax-check
+# ドライラン
+ansible-playbook site.yml -i inventories/sample/ --check
+
+# コーディング規約チェック
+ansible-lint site.yml
 ```
