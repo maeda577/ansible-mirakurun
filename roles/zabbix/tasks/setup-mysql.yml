@@ -20,7 +20,9 @@
 # https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html
 # --password Accepted but always ignored.
 - name: Execute mysql_secure_installation
-  command: "mysql_secure_installation --use-default --user=root --password=dummyPassword"
+  command: >
+    "mysql_secure_installation --use-default
+    --user=root --password=dummyPassword"
   become: true
   when: install_mysql.changed
   tags:
@@ -54,7 +56,10 @@
   notify: restart_zabbix
 
 - name: Import initial schema and data
-  shell: "set -o pipefail && zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -u zabbix -p{{ mysql_zabbix_user_password }} zabbix"
+  shell: >
+    set -o pipefail
+    && zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz
+    | mysql -u zabbix -p{{ mysql_zabbix_user_password }} zabbix
   when: install_mysql.changed
   no_log: true
   notify: restart_zabbix

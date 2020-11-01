@@ -39,7 +39,7 @@ Raspberry Pi 3 model B上のUbuntu 20.04とRaspberry Pi OS Lite August 2020で�
 ``` shell
 # Ansible導入
 sudo apt install python3-pip sshpass
-sudo pip3 install ansible ansible-lint
+sudo pip3 install ansible
 
 # 接続先のホストに一度は繋いでknown_hostsに足し、アップデートする
 ssh ubuntu@192.168.0.100 sudo apt update
@@ -64,6 +64,8 @@ ansible-playbook site.yml -i inventories/sample/ --ask-become-pass -v
 事前チェック関連のメモ
 -----------------------
 ``` shell
+pip3 install ansible-lint yamllint
+
 # 構文エラーの確認
 ansible-playbook site.yml -i inventories/sample/ --syntax-check
 # ドライラン
@@ -71,4 +73,5 @@ ansible-playbook site.yml -i inventories/sample/ --check
 
 # コーディング規約チェック
 ansible-lint site.yml
+yamllint .
 ```

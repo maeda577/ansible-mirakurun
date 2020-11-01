@@ -2,7 +2,11 @@
 - import_tasks: setup-common.yml
 
 - import_tasks: setup-nftables.yml
-  when: ansible_distribution == 'Debian' and ansible_distribution_major_version|int >= 10
+  when: >
+    ansible_distribution == 'Debian'
+    and ansible_distribution_major_version|int >= 10
 
 - import_tasks: setup-iptables.yml
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int >= 18
+  when: >
+    ansible_distribution == 'Ubuntu'
+    and ansible_distribution_major_version|int >= 18

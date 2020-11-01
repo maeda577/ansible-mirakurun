@@ -4,6 +4,7 @@
     url: https://repo.zabbix.com/zabbix-official-repo.key
   become: true
 
+# yamllint disable rule:line-length
 - name: Add zabbix deb repository
   apt_repository:
     repo: "{{ item }}"
@@ -12,6 +13,7 @@
   loop:
     - "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
     - "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
+# yamllint enable rule:line-length
 
 - name: Install packages
   apt:
