@@ -1,3 +1,4 @@
+---
 - name: Install zabbix signing key
   apt_key:
     url: https://repo.zabbix.com/zabbix-official-repo.key

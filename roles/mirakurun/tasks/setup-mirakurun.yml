@@ -1,3 +1,4 @@
+---
 - name: Install PM2
   npm:
     name: pm2

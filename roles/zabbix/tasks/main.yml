@@ -1,3 +1,4 @@
+---
 - import_tasks: setup-mysql.yml
   when: ansible_distribution in ['Ubuntu', 'Debian']
 

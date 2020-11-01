@@ -1,3 +1,4 @@
+---
 - name: Reset s270
   command: usb_modeswitch -v 0x187f -p 0x0600 --reset-usb
   become: yes

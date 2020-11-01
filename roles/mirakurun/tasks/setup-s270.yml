@@ -1,3 +1,4 @@
+---
 - name: Download S270 firmware
   get_url:
     url: https://github.com/OpenELEC/dvb-firmware/raw/master/firmware/isdbt_rio.inp

@@ -1,3 +1,4 @@
+---
 - name: Check S270 exists
   command: lsusb -d 187f:0600
   changed_when: False
