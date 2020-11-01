@@ -1,17 +1,17 @@
 ---
 - name: Check S270 exists
   command: lsusb -d 187f:0600
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
   register: check_s270
-  check_mode: no
+  check_mode: false
 
 - name: Check US-3POUT exists
   command: lsusb -d 0511:0045
-  changed_when: False
-  failed_when: False
+  changed_when: false
+  failed_when: false
   register: check_us3pout
-  check_mode: no
+  check_mode: false
 
 - import_tasks: setup-ubuntu.yml
   when: ansible_distribution in ['Ubuntu', 'Debian']

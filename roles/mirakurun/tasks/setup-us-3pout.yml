@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   notify:
     - reset_us_3pout
     - restart_mirakurn
@@ -14,9 +14,9 @@
 - name: Install build-essential
   apt:
     name: build-essential
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
 - name: Clone recfsusb2n
   git:
@@ -29,7 +29,7 @@
   community.general.make:
     chdir: "/home/{{ ansible_user }}/recfsusb2n/src"
     target: "{{ item }}"
-  become: yes
+  become: true
   when: git_clone.changed
   loop:
     - clean
@@ -45,4 +45,4 @@
     owner: root
     group: root
     mode: 0755
-  become: yes
+  become: true

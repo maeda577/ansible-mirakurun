@@ -8,7 +8,7 @@
   hostname:
     name: "{{ inventory_hostname }}"
     use: systemd
-  become: yes
+  become: true
 
 - name: Set hostname to /etc/hosts
   lineinfile:
@@ -18,24 +18,24 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
 
 - name: Set timezone
   timezone:
     name: Asia/Tokyo
-  become: yes
+  become: true
 
 - name: Install avahi-daemon
   apt:
     name:
       - avahi-daemon
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
 - name: Enable avahi-daemon
   systemd:
     name: avahi-daemon.service
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true

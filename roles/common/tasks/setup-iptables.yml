@@ -3,9 +3,9 @@
   apt:
     name:
       - iptables-persistent
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
   notify: reload_netfilter_persistent
 
 - name: Set rules.v4
@@ -16,7 +16,7 @@
     group: root
     mode: 0644
     validate: iptables-restore --test %s
-  become: yes
+  become: true
   notify: restart_netfilter_persistent
 
 - name: Set rules.v6
@@ -27,5 +27,5 @@
     group: root
     mode: 0644
     validate: ip6tables-restore --test %s
-  become: yes
+  become: true
   notify: restart_netfilter_persistent

@@ -2,24 +2,24 @@
 - name: Install PM2
   npm:
     name: pm2
-    global: yes
-  become: yes
+    global: true
+  become: true
 
 - name: Install Mirakurun
   npm:
     name: mirakurun
-    global: yes
-    unsafe_perm: yes
-    production: yes
-  become: yes
+    global: true
+    unsafe_perm: true
+    production: true
+  become: true
   notify: restart_mirakurn
 
 - name: Install arib test
   npm:
     name: arib-b25-stream-test
-    global: yes
-    unsafe_perm: yes
-  become: yes
+    global: true
+    unsafe_perm: true
+  become: true
   notify: restart_mirakurn
 
 - name: Clone dvbconf repository
@@ -27,7 +27,7 @@
     repo: https://github.com/Chinachu/dvbconf-for-isdb.git
     dest: /usr/local/dvbconf
     version: 3f5d210
-  become: yes
+  become: true
   notify: restart_mirakurn
 
 - name: Set tuner config
@@ -37,7 +37,7 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   notify: restart_mirakurn
 
 - name: Set channel config
@@ -47,5 +47,5 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   notify: restart_mirakurn

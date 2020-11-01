@@ -2,13 +2,13 @@
 - name: Install NodeSource signing key
   apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-  become: yes
+  become: true
 
 - name: Add NodeSource deb repository
   apt_repository:
     repo: "{{ item }}"
-    update_cache: yes
-  become: yes
+    update_cache: true
+  become: true
   loop:
     - "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
     - "deb-src https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
@@ -23,6 +23,6 @@
       - nodejs
       - git
       - build-essential
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true

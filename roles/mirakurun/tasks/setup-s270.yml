@@ -3,5 +3,5 @@
   get_url:
     url: https://github.com/OpenELEC/dvb-firmware/raw/master/firmware/isdbt_rio.inp
     dest: /lib/firmware/isdbt_rio.inp
-  become: yes
+  become: true
   notify: reload_s270

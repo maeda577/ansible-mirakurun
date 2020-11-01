@@ -3,14 +3,14 @@
   systemd:
     name: nftables.service
     state: reloaded
-    enabled: yes
+    enabled: true
   listen: reload_nftables
-  become: yes
+  become: true
 
 - name: Restart netfilter-persistent
   systemd:
     name: netfilter-persistent.service
     state: restarted
-    enabled: yes
+    enabled: true
   listen: restart_netfilter_persistent
-  become: yes
+  become: true

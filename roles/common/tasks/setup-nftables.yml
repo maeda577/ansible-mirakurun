@@ -3,16 +3,16 @@
   apt:
     name:
       - nftables
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
 - name: Enable nftables
   systemd:
     name: nftables.service
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
 
 - name: Set ntftables.conf
   template:
@@ -22,5 +22,5 @@
     group: root
     mode: 0744
     validate: nft -c -f %s
-  become: yes
+  become: true
   notify: Reload nftables

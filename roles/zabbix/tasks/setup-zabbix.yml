@@ -2,13 +2,13 @@
 - name: Install zabbix signing key
   apt_key:
     url: https://repo.zabbix.com/zabbix-official-repo.key
-  become: yes
+  become: true
 
 - name: Add zabbix deb repository
   apt_repository:
     repo: "{{ item }}"
-    update_cache: yes
-  become: yes
+    update_cache: true
+  become: true
   loop:
     - "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
     - "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }} {{ ansible_distribution_release }} main"
@@ -21,16 +21,16 @@
       - zabbix-apache-conf
       - zabbix-agent
       - apache2
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
   notify: restart_zabbix
 
 - name: Enable zabbix services
   systemd:
     name: "{{ item }}"
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
   loop:
     - zabbix-server.service
     - zabbix-agent.service
@@ -44,7 +44,7 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   notify: restart_zabbix
   no_log: true
 
@@ -56,5 +56,5 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   notify: restart_zabbix

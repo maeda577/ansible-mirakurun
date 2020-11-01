@@ -5,23 +5,23 @@
       - mysql-server
       - mysql-client
       - python3-pip
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
   register: install_mysql
 
 - name: Start and enable mysql
   systemd:
     name: mysql.service
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
 
 # https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html
 # --password Accepted but always ignored.
 - name: Execute mysql_secure_installation
   command: "mysql_secure_installation --use-default --user=root --password=dummyPassword"
-  become: yes
+  become: true
   when: install_mysql.changed
   tags:
     - skip_ansible_lint
@@ -30,7 +30,7 @@
   pip:
     name: pymysql
     state: present
-  become: yes
+  become: true
 
 - name: Create zabbix database
   community.mysql.mysql_db:
@@ -39,7 +39,7 @@
     collation: utf8_bin
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  become: yes
+  become: true
   notify: restart_zabbix
 
 - name: Create zabbix user
@@ -50,7 +50,7 @@
     priv: "zabbix.*:ALL"
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  become: yes
+  become: true
   notify: restart_zabbix
 
 - name: Import initial schema and data

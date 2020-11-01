@@ -1,5 +1,5 @@
 ---
 collections:
-  - name: community.zabbix  # zabbixで使用
-  - name: community.mysql   # zabbixで使用
-  - name: community.general # mirakurunのnpmモジュールで使用
+  - name: community.zabbix    # zabbixで使用
+  - name: community.mysql     # zabbixで使用
+  - name: community.general   # mirakurunのnpmモジュールで使用

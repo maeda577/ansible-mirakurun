@@ -1,12 +1,12 @@
 ---
 - name: Reset s270
   command: usb_modeswitch -v 0x187f -p 0x0600 --reset-usb
-  become: yes
+  become: true
   listen: reload_s270
 
 - name: Reset us-3pout
   command: "{{ item }}"
-  become: yes
+  become: true
   loop:
     - udevadm control --reload-rules
     - usb_modeswitch -v 0x0511 -p 0x0045 --reset-usb
@@ -14,5 +14,5 @@
 
 - name: Restart mirakurn
   command: mirakurun restart
-  become: yes
+  become: true
   listen: restart_mirakurn

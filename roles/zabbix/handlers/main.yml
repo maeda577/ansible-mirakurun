@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: reloaded
   listen: restart_zabbix
-  become: yes
+  become: true
   loop:
     - zabbix-server.service
     - zabbix-agent.service
